@@ -1,0 +1,28 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+
+.App {
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 2%;
+  margin-bottom: 4%;
+}
+
+nav a {
+  text-decoration: none;
+  font-family: cursive;
+}
+
+form {
+  margin-top: 3%;
+}
+
+.errorForm{
+  color: red;
+}
