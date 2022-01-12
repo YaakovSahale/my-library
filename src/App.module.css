@@ -26,3 +26,7 @@ form {
 .errorForm{
   color: red;
 }
+
+.bookImg{
+  cursor: pointer;
+}

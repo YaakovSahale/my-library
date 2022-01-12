@@ -12,7 +12,7 @@ const Login = ({ userAuth, setUserAuth }) => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    setServerError("")
+    setServerError("");
 
     const FIREBASE_API_KEY = "AIzaSyCBpR8lmShutluv7AkGrMmW3FzY7vB7KKg";
     const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
@@ -27,11 +27,13 @@ const Login = ({ userAuth, setUserAuth }) => {
       .post(URL, { email, password })
       .then((data) => {
         setUserAuth(data);
+        localStorage.setItem("userAuth", JSON.stringify(data));
       })
       .catch((err) => {
         console.dir(err);
         setServerError(err.response.data.error.message);
       });
+
   };
 
   return (

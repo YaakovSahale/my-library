@@ -17,7 +17,8 @@ function App() {
   const [readingList, setReadingList] = useState([]);
   const [discoverList, setDiscoverList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
-  const [details, setDetails] = useState("");
+  const [bookDetails, setBookDetails] = useState("");
+  const [redirectToDetails, setRedirectToDetails] = useState(false);
 
   useEffect(showDefaultBooks, []);
 
@@ -27,9 +28,13 @@ function App() {
     axios
       .get(URL)
       .then((data) => {
-        console.log(data.data.items);
         const booksData = data.data.items;
-        booksData.map((book) => (book.isReading = false));
+        console.log(booksData);
+        booksData.map((book) => {
+          book.isReading = false;
+          book.userNote = "";
+          book.userGrade = "";
+        });
         setDiscoverList(booksData);
       })
       .catch((err) => console.error(err));
@@ -44,18 +49,26 @@ function App() {
               <Link to={"/Discover"}>Discover</Link>
               <Link to={"/ReadingList"}>ReadingList</Link>
               <Link to={"/CompletedList"}>CompletedList</Link>
-              <button onClick={() => setUserAuth(null)}>Log out</button>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("userAuth");
+                  setUserAuth(null);
+                }}
+              >
+                Log out
+              </button>
             </>
           ) : (
-            <>
-              <Link to={"/"}>Opening</Link>
-              <Redirect to={"/"} />
-            </>
+            <Redirect to={"/"} />
           )}
         </nav>
 
         <Switch>
-          <Route exact path="/" render={() => <Opening />} />
+          <Route
+            exact
+            path="/"
+            render={() => <Opening setUserAuth={setUserAuth} />}
+          />
           <Route
             exact
             path="/Register"
@@ -81,6 +94,9 @@ function App() {
                 setDiscoverList={setDiscoverList}
                 completedList={completedList}
                 setCompletedList={setCompletedList}
+                setBookDetails={setBookDetails}
+                redirectToDetails={redirectToDetails}
+                setRedirectToDetails={setRedirectToDetails}
               />
             )}
           />
@@ -112,7 +128,16 @@ function App() {
               />
             )}
           />
-          <Route exact path="/Details" render={() => <Details />} />
+          <Route
+            exact
+            path="/Details"
+            render={() => (
+              <Details
+                bookDetails={bookDetails}
+                setRedirectToDetails={setRedirectToDetails}
+              />
+            )}
+          />
           <Route component={PageNotFound} />
         </Switch>
       </div>

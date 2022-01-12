@@ -24,7 +24,7 @@ const Register = ({ setUserAuth, userAuth }) => {
       .post(URL, { email, password })
       .then((data) => {
         setUserAuth(data);
-        console.log(data);
+        localStorage.setItem("userAuth", JSON.stringify(data));
       })
       .catch((err) => console.error(err));
   };
