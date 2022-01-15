@@ -60,6 +60,8 @@ form {
 
 .listBtn {
   padding: 50%;
+  cursor: pointer;
+
 }
 
 .opening {
@@ -77,8 +79,10 @@ form {
   font-size: 40px;
 }
 
-.button {
+button{
+  cursor: pointer;
 }
+
 
 .openingBtnDiv {
   display: flex;
@@ -176,5 +180,4 @@ input[type="submit"]:hover {
 
 .star{
   cursor: pointer;
-
 }
