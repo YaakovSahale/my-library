@@ -5,13 +5,17 @@
 
 .App {
   text-align: center;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
 }
 
 nav {
   display: flex;
   justify-content: space-around;
-  padding: 2%;
-  margin-bottom: 4%;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: rgb(212, 200, 160);
 }
 
 nav a {
@@ -23,10 +27,154 @@ form {
   margin-top: 3%;
 }
 
-.errorForm{
+.errorForm {
   color: red;
 }
 
-.bookImg{
+.bookImg {
   cursor: pointer;
+  border-radius: 10px 10px;
+}
+
+.bookTab {
+  display: flex;
+  margin: 3%;
+}
+
+.detailTextarea {
+  margin: 5%;
+}
+
+.starButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
+
+.listBtn {
+  padding: 50%;
+}
+
+.opening {
+  background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP._pIMXU-a5mdlXyH8e6aOBgHaDt%26pid%3DApi&f=1);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 97vh;
+}
+
+.openingSection {
+  font-size: 40px;
+}
+
+.button {
+}
+
+.openingBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8%;
+}
+
+.openingBtn {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+.openingBtn:hover {
+  filter: brightness(50%);
+}
+
+form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  filter: opacity(80%);
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  filter: brightness(80%);
+}
+
+.discover {
+  background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Z1eqHxbTFaf-XhJF1gzCvgAAAA%26pid%3DApi&f=1);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logOutBtn {
+  padding: 5px 5px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.logOutBtn:hover {
+  filter: brightness(50%);
+}
+
+.searchBar {
+  opacity: 80%;
+}
+
+.actionBtn {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+
+}
+
+.completedTab, .readingTab{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 1px;
+}
+
+.completedPage, .readingPage{
+  background-color: #e3be80;
+  min-height: 100vh;
+}
+
+.pageTitle{
+  font-size: 50px;
+  margin-bottom: 30px;
+  font-family: ui-sans-serif;
+}
+
+.star{
+  cursor: pointer;
+
 }

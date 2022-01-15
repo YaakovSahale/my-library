@@ -1,10 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "../App.module.css";
 
 const Details = ({ bookDetails, setRedirectToDetails }) => {
-  useEffect(() => setRedirectToDetails(false), []);
+  const [notesState, setNotesState] = useState("");
+  useEffect(() => {
+    setRedirectToDetails(false);
+    setNotesState(bookDetails.userNotes);
+  }, []);
 
-  console.log(bookDetails);
+  const addUserNotes = (e) => {
+    setNotesState(e.target.value);
+    const tempReadingList = JSON.parse(localStorage.getItem("readingList"));
+    const tempCompletedList = JSON.parse(localStorage.getItem("completedList"));
+
+    tempReadingList.find((book) => {
+      if (book.id === bookDetails.id) {
+        book.userNotes = e.target.value;
+        localStorage.setItem("readingList", JSON.stringify(tempReadingList));
+      }
+    });
+
+    tempCompletedList.find((book) => {
+      if (book.id === bookDetails.id) {
+        book.userNotes = e.target.value;
+        localStorage.setItem(
+          "completedList",
+          JSON.stringify(tempCompletedList)
+        );
+      }
+    });
+  };
+
   return (
     <div>
       <h1>Details</h1>
@@ -19,6 +45,15 @@ const Details = ({ bookDetails, setRedirectToDetails }) => {
           <p>{bookDetails.volumeInfo.description}</p>
           <br />
           <br />
+          {bookDetails.userNotes ? (
+            <textarea
+              className={styles.detailTextarea}
+              cols="80"
+              rows="10"
+              value={notesState}
+              onChange={(e) => addUserNotes(e)}
+            ></textarea>
+          ) : null}
         </article>
       ) : null}
     </div>

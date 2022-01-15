@@ -30,9 +30,9 @@ const Register = ({ setUserAuth, userAuth }) => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className={styles.opening}>
       <form onSubmit={registerUser}>
+      <h1>Register</h1>
         <input
           type="email"
           placeholder="email"

@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import styles from "../App.module.css";
+import StarRating from "./StarRating";
+import { CgPlayListRemove } from "react-icons/Cg";
 
 const CompletedList = ({
-  discoverList,
-  setDiscoverList,
-  readingList,
-  setReadingList,
   completedList,
   setCompletedList,
+  redirectToDetails,
+  setRedirectToDetails,
+  setBookDetails,
 }) => {
   useEffect(
     () => setCompletedList(JSON.parse(localStorage.getItem("completedList"))),
@@ -24,26 +27,39 @@ const CompletedList = ({
   };
 
   return (
-    <div>
-      <h1>Completed List</h1>
-      <br />
-      <section>
+    <div className={styles.completedPage}>
+      <section className={styles.completedTab}>
+      <h1 className={styles.pageTitle}>Completed List</h1>
         {completedList
           ? completedList.map((book) => (
-              <article key={book.id}>
+              <article key={book.id} className={styles.completedTab}>
                 <h3>{book.volumeInfo.title}</h3>
                 <h4>{book.volumeInfo.authors[0]}</h4>
-                <img src={book.volumeInfo.imageLinks.smallThumbnail} />
+                <div>
+                  <img
+                    className={styles.bookImg}
+                    src={book.volumeInfo.imageLinks.smallThumbnail}
+                    onClick={() => {
+                      setBookDetails(book);
+                      setRedirectToDetails(true);
+                    }}
+                  />
+                </div>
+
+                <StarRating ratedBook={book} initialStars={book.userGrade} />
                 <p>{book.volumeInfo.description.slice(0, 400)}...</p>
-                <button onClick={() => removeFromCompletedList(book.id)}>
-                  remove from List
-                </button>
-                <br />
-                <br />
+                <div>
+                  <CgPlayListRemove
+                    className={styles.actionBtn}
+                    onClick={() => removeFromCompletedList(book.id)}
+                  />
+                </div>
+                <hr />
               </article>
             ))
           : null}
       </section>
+      {redirectToDetails ? <Redirect to={"/Details"} /> : null}
     </div>
   );
 };

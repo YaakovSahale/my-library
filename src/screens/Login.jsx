@@ -37,9 +37,9 @@ const Login = ({ userAuth, setUserAuth }) => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className={styles.opening}>
       <form onSubmit={loginUser}>
+      <h1>Login</h1>
         <input
           type="email"
           placeholder="email"

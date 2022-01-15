@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import styles from "../App.module.css";
+import { CgPlayListRemove } from "react-icons/Cg";
+import { CgPlayListAdd } from "react-icons/Cg";
 
 const ReadingList = ({
   discoverList,
@@ -7,6 +11,9 @@ const ReadingList = ({
   setReadingList,
   completedList,
   setCompletedList,
+  redirectToDetails,
+  setRedirectToDetails,
+  setBookDetails,
 }) => {
   useEffect(
     () => setReadingList(JSON.parse(localStorage.getItem("readingList"))),
@@ -40,31 +47,40 @@ const ReadingList = ({
     setCompletedList(tempCompletedList);
     localStorage.setItem("completedList", JSON.stringify(tempCompletedList));
   };
-
+  // background-color: #e3be80;
   return (
-    <div>
-      <h1>ReadingList</h1>
-      <br />
-      <section>
+    <div className={styles.readingPage}>
+      <section className={styles.readingTab}>
+      <h1 className={styles.pageTitle}>Reading List</h1>
         {readingList
           ? readingList.map((book) => (
               <article key={book.id}>
                 <h3>{book.volumeInfo.title}</h3>
                 <h4>{book.volumeInfo.authors[0]}</h4>
-                <img src={book.volumeInfo.imageLinks.smallThumbnail} />
+                <img
+                  className={styles.bookImg}
+                  src={book.volumeInfo.imageLinks.smallThumbnail}
+                  onClick={() => {
+                    setBookDetails(book);
+                    setRedirectToDetails(true);
+                  }}
+                />
                 <p>{book.volumeInfo.description.slice(0, 400)}...</p>
-                <button onClick={() => removeFromReadingList(book.id)}>
-                  remove from List
-                </button>
-                <button onClick={() => addToCompletedList(book.id)}>
-                  add to Completed
-                </button>
-                <br />
-                <br />
+
+                <CgPlayListRemove
+                  className={styles.actionBtn}
+                  onClick={() => removeFromReadingList(book.id)}
+                />
+                <CgPlayListAdd
+                  className={styles.actionBtn}
+                  onClick={() => addToCompletedList(book.id)}
+                />
+                <hr />
               </article>
             ))
           : null}
       </section>
+      {redirectToDetails ? <Redirect to={"/Details"} /> : null}
     </div>
   );
 };

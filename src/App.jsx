@@ -32,8 +32,6 @@ function App() {
         console.log(booksData);
         booksData.map((book) => {
           book.isReading = false;
-          book.userNote = "";
-          book.userGrade = "";
         });
         setDiscoverList(booksData);
       })
@@ -50,6 +48,7 @@ function App() {
               <Link to={"/ReadingList"}>ReadingList</Link>
               <Link to={"/CompletedList"}>CompletedList</Link>
               <button
+              className={styles.logOutBtn}
                 onClick={() => {
                   localStorage.removeItem("userAuth");
                   setUserAuth(null);
@@ -105,12 +104,15 @@ function App() {
             path="/ReadingList"
             render={() => (
               <ReadingList
-                readingList={readingList}
-                setReadingList={setReadingList}
                 discoverList={discoverList}
                 setDiscoverList={setDiscoverList}
+                readingList={readingList}
+                setReadingList={setReadingList}
                 completedList={completedList}
                 setCompletedList={setCompletedList}
+                redirectToDetails={redirectToDetails}
+                setRedirectToDetails={setRedirectToDetails}
+                setBookDetails={setBookDetails}
               />
             )}
           />
@@ -125,6 +127,9 @@ function App() {
                 setDiscoverList={setDiscoverList}
                 completedList={completedList}
                 setCompletedList={setCompletedList}
+                redirectToDetails={redirectToDetails}
+                setRedirectToDetails={setRedirectToDetails}
+                setBookDetails={setBookDetails}
               />
             )}
           />
@@ -135,6 +140,10 @@ function App() {
               <Details
                 bookDetails={bookDetails}
                 setRedirectToDetails={setRedirectToDetails}
+                readingList={readingList}
+                setReadingList={setReadingList}
+                completedList={completedList}
+                setCompletedList={setCompletedList}
               />
             )}
           />
