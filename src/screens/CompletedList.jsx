@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import styles from "../App.module.css";
-import StarRating from "./StarRating";
+import StarRating from "../components/StarRating";
 import { CgPlayListRemove } from "react-icons/Cg";
 
 const CompletedList = ({

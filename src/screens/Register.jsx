@@ -8,6 +8,7 @@ const Register = ({ setUserAuth, userAuth }) => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const registerUser = (e) => {
     e.preventDefault();
@@ -26,13 +27,16 @@ const Register = ({ setUserAuth, userAuth }) => {
         setUserAuth(data);
         localStorage.setItem("userAuth", JSON.stringify(data));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setServerError(err.response.data.error.message);
+      });
   };
 
   return (
     <div className={styles.opening}>
       <form onSubmit={registerUser}>
-      <h1>Register</h1>
+        <h1>Register</h1>
         <input
           type="email"
           placeholder="email"
@@ -46,16 +50,22 @@ const Register = ({ setUserAuth, userAuth }) => {
         />
         <br />
         <br />
+        <div>
+          {passwordError ? (
+            <p className={styles.errorForm}>
+              password must be {<br />} at least 6 characters long
+            </p>
+          ) : null}
+          {emailError ? (
+            <p className={styles.errorForm}>password must includes ".com"</p>
+          ) : null}
+          {serverError ? (
+            <p className={styles.errorForm}>{serverError}</p>
+          ) : null}
+        </div>
         <input type="submit" value={"Register"} />
       </form>
-      {passwordError ? (
-        <p className={styles.errorForm}>
-          password must be at least 6 characters long
-        </p>
-      ) : null}
-      {emailError ? (
-        <p className={styles.errorForm}>password must includes ".com"</p>
-      ) : null}
+
       {userAuth ? <Redirect to={"/Discover"} /> : null}
     </div>
   );

@@ -33,13 +33,13 @@ const Login = ({ userAuth, setUserAuth }) => {
         console.dir(err);
         setServerError(err.response.data.error.message);
       });
-
   };
+
 
   return (
     <div className={styles.opening}>
       <form onSubmit={loginUser}>
-      <h1>Login</h1>
+        <h1>Login</h1>
         <input
           type="email"
           placeholder="email"
@@ -53,17 +53,22 @@ const Login = ({ userAuth, setUserAuth }) => {
         />
         <br />
         <br />
+        <div>
+          {passwordError ? (
+            <p className={styles.errorForm}>
+              password must be {<br />} at least 6 characters long
+            </p>
+          ) : null}
+          {emailError ? (
+            <p className={styles.errorForm}>password must includes ".com"</p>
+          ) : null}
+          {serverError ? (
+            <p className={styles.errorForm}>{serverError}</p>
+          ) : null}
+        </div>
         <input type="submit" value={"Login"} />
       </form>
-      {passwordError ? (
-        <p className={styles.errorForm}>
-          password must be at least 6 characters long
-        </p>
-      ) : null}
-      {emailError ? (
-        <p className={styles.errorForm}>password must includes ".com"</p>
-      ) : null}
-      {serverError ? <p className={styles.errorForm}>{serverError}</p> : null}
+
       {userAuth ? <Redirect to={"/Discover"} /> : null}
     </div>
   );
